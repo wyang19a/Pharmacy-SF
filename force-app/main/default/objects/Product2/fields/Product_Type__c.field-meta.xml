@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Type__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(RecordTypeId = &apos;0125e000000smaDAAQ&apos;, &apos;Device&apos;,
+IF(RecordTypeId = &apos;0125e000000smZyAAI&apos;, &apos;Food/Dietary&apos;,
+IF(RecordTypeId = &apos;0125e000000sma8AAA&apos;, &apos;Medication&apos;, &apos;N/A&apos;)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Product Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

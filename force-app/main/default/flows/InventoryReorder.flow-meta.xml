@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <interviewLabel>InventoryReorder {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>InventoryReorder</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_Inventory_Record</name>
+        <label>Get Inventory Record</label>
+        <locationX>222</locationX>
+        <locationY>232</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Order_Screen</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varInventoryId</elementReference>
+            </value>
+        </filters>
+        <object>Inventory__c</object>
+        <outputReference>varInventoryRecord</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Inventory_Level__c</queriedFields>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Inventory</name>
+        <label>Update Inventory</label>
+        <locationX>467</locationX>
+        <locationY>476</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varInventoryId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Inventory_Level__c</field>
+            <value>
+                <elementReference>Order_Quantity2</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Inventory__c</object>
+    </recordUpdates>
+    <screens>
+        <description>Absolutely sure?</description>
+        <name>Confirm_ReOrder_Screen</name>
+        <label>Confirm ReOrder Screen</label>
+        <locationX>704</locationX>
+        <locationY>441</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>ConfirmReorder</name>
+            <fieldText>&lt;p&gt;Ordering &lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;{!Order_Quantity2} &lt;/span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;of &lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>Order_Screen</name>
+        <label>Order Screen</label>
+        <locationX>288</locationX>
+        <locationY>390</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Update_Inventory</targetReference>
+        </connector>
+        <fields>
+            <name>Order_Screen_Section1</name>
+            <fieldType>RegionContainer</fieldType>
+            <fields>
+                <name>Order_Screen_Section1_Column1</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>CurrentInvLvl</name>
+                    <fieldText>&lt;p&gt;Current Inventory: {!varInventoryRecord.Inventory_Level__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Target Inventory: &lt;/p&gt;</fieldText>
+                    <fieldType>DisplayText</fieldType>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>12</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Order_Quantity2</name>
+            <dataType>Number</dataType>
+            <fieldText>Order Quantity</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <scale>0</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Order Quantity must be greater than 0, less than 5000&lt;/p&gt;</errorMessage>
+                <formulaExpression>AND(
+{!Order_Quantity} &lt;= 5000,
+{!Order_Quantity} &gt;= 0
+)</formulaExpression>
+            </validationRule>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>Quick_Re_order</name>
+        <label>Quick Re-order</label>
+        <locationX>74</locationX>
+        <locationY>314</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Order_Quantity</name>
+            <dataType>Number</dataType>
+            <defaultValue>
+                <numberValue>0.0</numberValue>
+            </defaultValue>
+            <fieldText>Order Quantity</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <scale>0</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Please provide a number greater than 0, less than 5000.&lt;/p&gt;</errorMessage>
+                <formulaExpression>AND(
+{!Order_Quantity} &lt;= 5000,
+{!Order_Quantity} &gt;= 0
+)</formulaExpression>
+            </validationRule>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Get_Inventory_Record</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <name>varFormulary</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Formulary__c</objectType>
+    </variables>
+    <variables>
+        <name>varInventoryId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>varInventoryRecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Inventory__c</objectType>
+    </variables>
+</Flow>

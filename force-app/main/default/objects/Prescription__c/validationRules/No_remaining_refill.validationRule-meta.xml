@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_remaining_refill</fullName>
+    <active>true</active>
+    <errorConditionFormula>Refills__c  &lt;= 0</errorConditionFormula>
+    <errorDisplayField>Refills__c</errorDisplayField>
+    <errorMessage>There are no refills left! Contact patient&apos;s provider.</errorMessage>
+</ValidationRule>
