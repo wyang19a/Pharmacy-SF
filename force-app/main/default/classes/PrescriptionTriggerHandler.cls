@@ -1,6 +1,6 @@
 public class PrescriptionTriggerHandler {
 
-    public static void handleRxAfterUpdate(List<Prescription__c> newList, List<Prescription__c> oldList) {
+    public static void createReminderTaskAfterUpdate(List<Prescription__c> newList, List<Prescription__c> oldList) {
         for(Prescription__c rx : newList) {
             if(rx.Refills__c <= 1) {
                 Task newTask = new Task();
@@ -12,4 +12,5 @@ public class PrescriptionTriggerHandler {
             }
         }
     }
+
 }

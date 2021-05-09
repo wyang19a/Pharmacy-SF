@@ -1,5 +1,8 @@
-trigger PrescriptionTrigger on Prescription__c (after update) {
+trigger PrescriptionTrigger on Prescription__c (after update, before update, before insert) {
   if(Trigger.isAfter && Trigger.isUpdate) {
-    PrescriptionTriggerHandler.handleRxAfterUpdate(Trigger.New, Trigger.Old);
+    PrescriptionTriggerHandler.createReminderTaskAfterUpdate(Trigger.New, Trigger.Old);
   }
+  // if(Trigger.isBefore && (Trigger.isUpdate || Trigger.isInsert)) {
+
+  // }
 }
