@@ -1,8 +1,8 @@
 public class FormularyTriggerHandler {
-    //firing on Formulary__c BEFORE-UPDATE
-    public static void handleBackorderedFormulary(List<Formulary__c> oldList) {
-        for(Formulary__c form : oldList) {
-            if(form.Backorder__c == true) {
+    //firing on Formulary__c AFTER-UPDATE
+    public static void handleBackorderedFormulary(List<Formulary__c> newList) {
+        for(Formulary__c form : newList) {
+            if(form.Backorder__c != true) {
 
                 //TODO: refactor to pull in rx data to provide reference in Task.
                 Patient__c[] patientList = [SELECT Id FROM Patient__c WHERE Id IN (
