@@ -1,32 +1,37 @@
 @isTest
-public class FormularyTriggerTest {
-    @isTest static void FormularyTriggerTest(){
-
-        Formulary__c f = new Formulary__c();
-        f.Name = 'Test Formulary';
-        f.Inventory__c = 100;
-        f.Type__c = 'Commercial';
-        f.Backorder__c = false;
-        insert f;
-
+private class FormularyTriggerTest {
+    @isTest
+    private static void FormularyTriggerTest(){
         Patient__c pt = new Patient__c();
         pt.Name = 'Test Patient';
         pt.First_Name__c = 'Test First Name';
         pt.Date_Of_Birth__c = Date.today();
         insert pt;
 
+        List<Formulary__c> fList = new List<Formulary__c>();
+        for(Integer i = 0; i < 200; i++) {
+            Formulary__c f = new Formulary__c();
+            f.Name = 'Test Formulary ' + i;
+            f.Inventory__c = 100;
+            f.Type__c = 'Commercial';
+            f.Backorder__c = false;
+            fList.add(f);
+        }
+        insert fList;
+
         Prescription__c rx = new Prescription__c();
-        rx.Patient__c = pt.Id;
-        rx.Product__c = f.Id;
+        rx.Patient__c = pt.id;
+        rx.Product__c = fList[0].Id;
         rx.Quantity__c = 30;
         rx.Daily_Dose__c = 1;
+        rx.Refills__c = 3;
         insert rx;
-
         
-        f.Backorder__c = true;
+        for(Integer i = 0; i < fList.size(); i++) {
+            fList[i].Backorder__c = true;
+        }
         test.startTest();
-        System.debug(f);
-        update f;
+        update fList;
         test.stopTest();
 
         // Assert
