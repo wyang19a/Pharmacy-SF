@@ -1,9 +1,10 @@
 public class FormularyTriggerHandler {
-
+    //firing on Formulary__c BEFORE-UPDATE
     public static void handleBackorderedFormulary(List<Formulary__c> oldList) {
         for(Formulary__c form : oldList) {
             if(form.Backorder__c == true) {
 
+                //TODO: refactor to pull in rx data to provide reference in Task.
                 Patient__c[] patientList = [SELECT Id FROM Patient__c WHERE Id IN (
                     SELECT Patient__c FROM Prescription__c WHERE Product__c = :form.id
                     )];
@@ -14,6 +15,8 @@ public class FormularyTriggerHandler {
                     newTask.Subject = 'Notify patient about the backorder on prescription';
                     newTask.Status = 'In Progress';
                     newTask.WhatId = patient.Id;
+
+                    insert newTask; 
                 }
             }
         }
