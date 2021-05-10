@@ -1,9 +1,6 @@
 trigger PatientTrigger on Patient__c (before insert, before update, after insert) {
   if(Trigger.isBefore) {
-    if (Trigger.isInsert) {
-      PatientTriggerHandler.handleNewPatients(Trigger.new);
-    }
-    if (Trigger.isUpdate) {
+    if (Trigger.isInsert || Trigger.isUpdate) {
       PatientTriggerHandler.handleNewPatients(Trigger.new);
     }
   }
