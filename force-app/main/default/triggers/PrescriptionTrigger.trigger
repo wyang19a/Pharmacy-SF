@@ -2,7 +2,4 @@ trigger PrescriptionTrigger on Prescription__c (after update, before update, bef
   if(Trigger.isAfter && Trigger.isUpdate) {
     PrescriptionTriggerHandler.createReminderTaskAfterUpdate(Trigger.New);
   }
-  // if(Trigger.isBefore && (Trigger.isUpdate || Trigger.isInsert)) {
-
-  // }
 }

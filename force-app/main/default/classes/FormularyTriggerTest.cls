@@ -1,13 +1,20 @@
 @isTest
 private class FormularyTriggerTest {
-    @isTest
-    private static void FormularyTriggerTest(){
+    // @testSetup
+    // static void setupData(){
+    //     Patient__c pt = MyDataFactory.insertTestPatient();
+    //     List<Formulary__c> fList = MyDataFactory.insertTestFormulary();
+    //     Prescription__c rx = MyDataFactory.insertTestPrescription(pt, fList);
+    // }
+    @isTest static void FormularyTriggerTest(){
+        //Set up for data for the tests
         Patient__c pt = new Patient__c();
         pt.Name = 'Test Patient';
         pt.First_Name__c = 'Test First Name';
         pt.Date_Of_Birth__c = Date.today();
         insert pt;
 
+        // bulkify Formulary
         List<Formulary__c> fList = new List<Formulary__c>();
         for(Integer i = 0; i < 200; i++) {
             Formulary__c f = new Formulary__c();
@@ -26,19 +33,30 @@ private class FormularyTriggerTest {
         rx.Daily_Dose__c = 1;
         rx.Refills__c = 3;
         insert rx;
-        
-        for(Integer i = 0; i < fList.size(); i++) {
-            fList[i].Backorder__c = true;
+
+        // Act
+        for(Formulary__c f : fList) {
+            f.Backorder__c = true;
         }
+
+        // Test
         test.startTest();
-        update fList;
+        // List<Boolean> exceptions = new List<Boolean>();
+        // String errorMessage = new String();
+        // try {
+            update fList;
+        // } catch(Exception e){
+            // errorMessage = e.getMessage();
+            // exceptions.add(true);
+        // }
         test.stopTest();
 
         // Assert
-        // System.assertEquals(false, f.backorder__c);
+        List<Task> tasks = [SELECT Id FROM Task];
+        List<Formulary__c> products = [SELECT Id from Formulary__c];
+        // System.assertEquals(200, tasks.size());
+        System.assertEquals(200, products.size());
     }
-    
-
     // @isTest(seeAllData=true)
     // public static void FormularyTriggerTest() {
     //     Formulary__c f = [SELECT Id FROM Formulary__c LIMIT 1];

@@ -1,5 +1,6 @@
-public class PrescriptionTriggerTest {
-    public static void PrescriptionTriggerTest() {
-
+@isTest
+private class PrescriptionTriggerTest {
+    @isTest static void PrescriptionTriggerTest() {
+        
     }
 }
