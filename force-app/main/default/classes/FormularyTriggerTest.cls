@@ -57,11 +57,23 @@ private class FormularyTriggerTest {
         // System.assertEquals(200, tasks.size()); // Getting 201..?
         System.assertEquals(200, products.size());
     }
-    // @isTest(seeAllData=true)
-    // public static void FormularyTriggerTest() {
-    //     Formulary__c f = [SELECT Id FROM Formulary__c LIMIT 1];
-    //     f.Backorder__c = TRUE;
-    //     Prescription__c[] p = [SELECT Prescription__c FROM ]
-    //     update f;
-    // }
+    
+    @isTest static void deletedRecordsWentToArchiveObj() {
+        Formulary__c[] fList = new Formulary__c[0];
+        for(Integer i = 0; i < 200; i++) {
+            Formulary__c f = new Formulary__c();
+            f.Name = 'Test ' + i;
+            f.Inventory__c = 100;
+            f.Type__c = 'Commercial';
+            fList.add(f);
+        }
+        insert fList;
+
+        test.startTest();
+        delete fList;
+        test.stopTest();
+
+        Formulary_Archive__c[] archiveList= [SELECT Id FROM Formulary_Archive__c];
+        SYstem.assertEquals(200, archiveList.size());
+    }
 }
