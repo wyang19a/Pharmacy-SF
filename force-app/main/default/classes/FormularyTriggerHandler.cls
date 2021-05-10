@@ -28,7 +28,7 @@ public class FormularyTriggerHandler {
         for(Formulary__c form : oldList) {
             Formulary_Archive__c newArc = new Formulary_Archive__c();
             newArc.Name = form.Formulary_Title__c;
-            newArc.Deleted_By__c = userRecord.Name;
+            newArc.Deleted_By__c = userRecord.Alias;
             newArc.Deleted_On__c = Date.today();
             lArchive.add(newArc);
         }
