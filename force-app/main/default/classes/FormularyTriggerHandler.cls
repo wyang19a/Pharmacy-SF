@@ -22,6 +22,7 @@ public class FormularyTriggerHandler {
         insert tList; 
     }
 
+    // TODO: test, fix
     public static void handleDeletedFormulary(List<Formulary__c> oldList) {
         List<Formulary_Archive__c> lArchive = new List<Formulary_Archive__c>();
         User userRecord = [SELECT Alias FROM User WHERE Id = :UserInfo.getUserId() LIMIT 1];

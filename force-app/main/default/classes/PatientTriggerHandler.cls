@@ -3,7 +3,6 @@ public class PatientTriggerHandler {
         for(Patient__c pt : newList) {
             pt.FullName__c = pt.First_Name__c + ' ' + pt.Name;
         }
-
     }
     public static void handlePatientsWithNoContact(List<Patient__c> newList) {
         Task[] tList = new Task[0];

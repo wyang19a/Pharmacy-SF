@@ -1,40 +1,39 @@
 @isTest
 private class FormularyTriggerTest {
-    // @testSetup
-    // static void setupData(){
-    //     Patient__c pt = MyDataFactory.insertTestPatient();
-    //     List<Formulary__c> fList = MyDataFactory.insertTestFormulary();
-    //     Prescription__c rx = MyDataFactory.insertTestPrescription(pt, fList);
-    // }
+
     @isTest static void FormularyTriggerTest(){
-        //Set up for data for the tests
-        Patient__c pt = new Patient__c();
-        pt.Name = 'Test Patient';
-        pt.First_Name__c = 'Test First Name';
-        pt.Date_Of_Birth__c = Date.today();
-        insert pt;
+        Patient__c pt = MyDataFactory.insertTestPatient();
+        List<Formulary__c> fList = MyDataFactory.insertTestFormulary();
+        Prescription__c rx = MyDataFactory.insertTestPrescription(pt, fList);
 
-        // bulkify Formulary
-        List<Formulary__c> fList = new List<Formulary__c>();
-        for(Integer i = 0; i < 200; i++) {
-            Formulary__c f = new Formulary__c();
-            f.Name = 'Test Formulary ' + i;
-            f.Inventory__c = 100;
-            f.Type__c = 'Commercial';
-            f.Backorder__c = false;
-            fList.add(f);
-        }
-        insert fList;
+        // //Set up for data for the tests
+        // Patient__c pt = new Patient__c();
+        // pt.Name = 'Test Patient';
+        // pt.First_Name__c = 'Test First Name';
+        // pt.Date_Of_Birth__c = Date.today();
+        // insert pt;
 
-        Prescription__c rx = new Prescription__c();
-        rx.Patient__c = pt.id;
-        rx.Product__c = fList[0].Id;
-        rx.Quantity__c = 30;
-        rx.Daily_Dose__c = 1;
-        rx.Refills__c = 3;
-        insert rx;
+        // // bulkify Formulary
+        // List<Formulary__c> fList = new List<Formulary__c>();
+        // for(Integer i = 0; i < 200; i++) {
+        //     Formulary__c f = new Formulary__c();
+        //     f.Name = 'Test Formulary ' + i;
+        //     f.Inventory__c = 100;
+        //     f.Type__c = 'Commercial';
+        //     f.Backorder__c = false;
+        //     fList.add(f);
+        // }
+        // insert fList;
 
-        // Act
+        // Prescription__c rx = new Prescription__c();
+        // rx.Patient__c = pt.id;
+        // rx.Product__c = fList[0].Id;
+        // rx.Quantity__c = 30;
+        // rx.Daily_Dose__c = 1;
+        // rx.Refills__c = 3;
+        // insert rx;
+
+        // Act only change part of the record set.
         for(Formulary__c f : fList) {
             f.Backorder__c = true;
         }
@@ -54,7 +53,7 @@ private class FormularyTriggerTest {
         // Assert
         List<Task> tasks = [SELECT Id FROM Task];
         List<Formulary__c> products = [SELECT Id from Formulary__c];
-        // System.assertEquals(200, tasks.size()); // Getting 201..?
+        System.assertEquals(200, tasks.size()); // Getting 201..?
         System.assertEquals(200, products.size());
     }
     
@@ -74,6 +73,6 @@ private class FormularyTriggerTest {
         test.stopTest();
 
         Formulary_Archive__c[] archiveList= [SELECT Id FROM Formulary_Archive__c];
-        SYstem.assertEquals(200, archiveList.size());
+        System.assertEquals(200, archiveList.size());
     }
 }

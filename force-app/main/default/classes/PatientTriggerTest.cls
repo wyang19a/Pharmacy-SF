@@ -12,6 +12,7 @@ private class PatientTriggerTest {
     //     }
     //     insert ptList;
     // } 
+
     @isTest static void newPatientWithoutContactTriggerTest() {
         Patient__c[] ptList = new Patient__c[0];
         for(Integer i = 0; i < 200; i++) {
