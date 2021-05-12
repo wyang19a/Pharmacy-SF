@@ -1,7 +1,7 @@
 # Pharmacy Prescription, Drug Formulary Management
 
 ### ERD
-![ERD-Draft](https://imgur.com/j1DkmsB.png)
+![ERD-Draft](https://imgur.com/iDglbfs.png)
 ### Project Requirements
 - Data Modeling/Security Modeling
 - Business process automation
