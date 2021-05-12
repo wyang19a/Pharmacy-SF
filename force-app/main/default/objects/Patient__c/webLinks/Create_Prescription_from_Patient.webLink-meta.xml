@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Create_Prescription_from_Patient</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Create Prescription from Patient</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>/flow/Add_Prescription_From_Patient_Record?varPatientId={!Patient__c.Id}&amp;retURL=a00?fcf=00B5e0000061fyvEAA</url>
+</WebLink>

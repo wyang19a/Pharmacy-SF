@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Daily_Dose_Not_Supplied_Error</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT(ISNUMBER(TEXT( Daily_Dose__c )))</errorConditionFormula>
+    <errorDisplayField>Daily_Dose__c</errorDisplayField>
+    <errorMessage>Please enter a number. Enter 0 if not applicable.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Compounded_Type_Formulary_Must_Have_MFR</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL( Type__c , &apos;Compounded&apos;) &amp;&amp;
+ISBLANK(MFR__c)</errorConditionFormula>
+    <errorDisplayField>MFR__c</errorDisplayField>
+    <errorMessage>You must assign MFR for every compounded preparation</errorMessage>
+</ValidationRule>

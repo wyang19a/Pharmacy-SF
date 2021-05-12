@@ -152,7 +152,7 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <externalSharingModel>ReadWrite</externalSharingModel>
     <label>Patient</label>
     <nameField>
         <label>Last Name</label>
@@ -160,7 +160,10 @@
         <type>Text</type>
     </nameField>
     <pluralLabel>Patients</pluralLabel>
-    <searchLayouts></searchLayouts>
-    <sharingModel>ControlledByParent</sharingModel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Search_Field__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Full_Name__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

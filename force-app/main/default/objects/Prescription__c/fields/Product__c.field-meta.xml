@@ -4,7 +4,7 @@
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
     <label>Product</label>
-    <referenceTo>Product2</referenceTo>
+    <referenceTo>Formulary__c</referenceTo>
     <relationshipLabel>Prescriptions</relationshipLabel>
     <relationshipName>Prescriptions</relationshipName>
     <required>false</required>

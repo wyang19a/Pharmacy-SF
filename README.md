@@ -1,18 +1,26 @@
-# Salesforce DX Project: Next Steps
+# Pharmacy Prescription, Drug Formulary Management
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+### ERD
+![ERD-Draft](https://imgur.com/iDglbfs.png)
+### Project Requirements
+- Data Modeling/Security Modeling
+- Business process automation
+- Version control
+- 100% test coverage
 
-## How Do You Plan to Deploy Your Changes?
+### Tools/Technologies Used
+- Salesforce declarative automation tools
+  - Workflow Rules
+  - Approval Processes
+  - Process Builders
+  - Flows
+- Apex triggers / Test
+- SOQL
+- SFDX
+- Git / GitHub
+- Visual Studio Code / Salesforce Developer Console
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
 
-## Configure Your Salesforce DX Project
+![Commits](https://imgur.com/709xled.png)
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
-
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+![Test](https://imgur.com/xQGrFoo.png)
