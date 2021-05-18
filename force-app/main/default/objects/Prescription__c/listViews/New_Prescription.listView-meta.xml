@@ -2,6 +2,15 @@
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>New_Prescription</fullName>
     <columns>NAME</columns>
+    <columns>Patient__c</columns>
+    <columns>Product__c</columns>
+    <columns>Quantity__c</columns>
+    <columns>Refills__c</columns>
     <filterScope>Mine</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>equals</operation>
+        <value>TODAY</value>
+    </filters>
     <label>New Prescription</label>
 </ListView>

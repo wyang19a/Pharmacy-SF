@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Low_stock_email_alert</fullName>
+        <description>Low stock email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>f2389fj@2f3j89.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>wyang19a@mindful-hawk-7gek9o.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Inventory_Low_Stock_Email</template>
+    </alerts>
+    <rules>
+        <fullName>Low stock rule</fullName>
+        <actions>
+            <name>Low_stock_email_alert</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Reorder_inventory</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <formula>Inventory_Level__c &lt;= 5</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <tasks>
+        <fullName>Reorder_inventory</fullName>
+        <assignedTo>jdoe@1092jf.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Restock Inventory</description>
+        <dueDateOffset>1</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>In Progress</status>
+        <subject>Reorder inventory</subject>
+    </tasks>
+</Workflow>

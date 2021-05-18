@@ -6,7 +6,6 @@
     <columns>Manufacturer__c</columns>
     <columns>Dosage_Form__c</columns>
     <columns>NAME</columns>
-    <columns>InventoryNo__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>
